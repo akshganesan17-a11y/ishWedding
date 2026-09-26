@@ -59,9 +59,11 @@ const fragmentShader = /* glsl */ `
     vec3 v = toCam / dist;
 
     vec2 p = vWorld.xz;
-    vec3 n1 = texture2D(uNormal, p * 0.045 + vec2(0.004, -0.018) * uTime).rgb * 2.0 - 1.0;
-    vec3 n2 = texture2D(uNormal, p * 0.11 + vec2(-0.012, -0.03) * uTime).rgb * 2.0 - 1.0;
-    vec3 n3 = texture2D(uNormal, p * 0.31 + vec2(0.02, -0.05) * uTime).rgb * 2.0 - 1.0;
+    // The river flows downstream (-Z) at about 1 m/s. Ripples are stretched
+    // along the current so the surface reads as a moving stream.
+    vec3 n1 = texture2D(uNormal, p * vec2(0.05, 0.03) + vec2(0.003, 0.032) * uTime).rgb * 2.0 - 1.0;
+    vec3 n2 = texture2D(uNormal, p * vec2(0.12, 0.07) + vec2(-0.006, 0.075) * uTime).rgb * 2.0 - 1.0;
+    vec3 n3 = texture2D(uNormal, p * 0.31 + vec2(0.01, 0.3) * uTime).rgb * 2.0 - 1.0;
     float near = 1.0 - smoothstep(10.0, 90.0, dist);
     vec2 slope = n1.xy * 0.45 + n2.xy * 0.4 + n3.xy * 0.35 * near;
     // Calm the ripples with distance so the far river turns to a mirror.
@@ -86,8 +88,9 @@ const fragmentShader = /* glsl */ `
     }
 
     // Water body: the river's own green-brown tint, lit a little by the sky.
-    vec3 body = uDeep * (0.75 + 0.25 * n.y) + uHorizon * 0.06;
-    vec3 col = mix(body, refl, clamp(fres * 1.1 + 0.28, 0.0, 1.0));
+    // Water body: clear river blue, a touch lighter where ripples face the sky.
+    vec3 body = uDeep * (0.8 + 0.35 * n.y) + uTop * 0.05;
+    vec3 col = mix(body, refl, clamp(fres * 1.1 + 0.2, 0.0, 1.0));
 
     vec3 sd = normalize(uSunDir);
     float s = max(dot(r, sd), 0.0);

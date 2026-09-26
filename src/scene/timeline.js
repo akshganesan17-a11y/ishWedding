@@ -44,28 +44,28 @@ const TIMES = [
     sun: c('#ffc88a'), sunAz: -0.42, sunEl: 0.075, sunI: 2.6, disc: 12, glow: 0.8,
     hemiSky: c('#ffd9b0'), hemiGround: c('#4a3a2a'), hemiI: 1.1,
     fog: c('#e8b48c'), fogD: 0.0011, exposure: 0.6,
-    deep: c('#3a4a3c'), bank: c('#231a12'), lamps: 0, stars: 0, glitter: 1, moon: 0,
+    deep: c('#2c5870'), bank: c('#231a12'), lamps: 0, stars: 0, glitter: 1, moon: 0,
   },
   {
     top: c('#0d1330'), mid: c('#4d3263'), horizon: c('#d8745c'),
     sun: c('#ff7040'), sunAz: -0.5, sunEl: -0.05, sunI: 0.12, disc: 0, glow: 0.9,
     hemiSky: c('#6a64a4'), hemiGround: c('#2a1e2a'), hemiI: 0.75,
     fog: c('#4a3558'), fogD: 0.0014, exposure: 1.0,
-    deep: c('#16242c'), bank: c('#07060a'), lamps: 1, stars: 0.8, glitter: 0, moon: 1,
+    deep: c('#0f2640'), bank: c('#07060a'), lamps: 1, stars: 0.8, glitter: 0, moon: 1,
   },
   {
     top: c('#25346c'), mid: c('#c08aa4'), horizon: c('#ffbf82'),
     sun: c('#ffb070'), sunAz: dawnAz + 0.032, sunEl: 0.088, sunI: 1.5, disc: 14, glow: 1.5,
     hemiSky: c('#b8a0c0'), hemiGround: c('#2a2030'), hemiI: 0.85,
     fog: c('#c89090'), fogD: 0.0012, exposure: 0.68,
-    deep: c('#34464a'), bank: c('#140f18'), lamps: 0.5, stars: 0.15, glitter: 1, moon: 0,
+    deep: c('#2d5a78'), bank: c('#140f18'), lamps: 0.5, stars: 0.15, glitter: 1, moon: 0,
   },
   {
     top: c('#5f93c8'), mid: c('#e9dcc4'), horizon: c('#fff0d8'),
     sun: c('#fff0d4'), sunAz: dawnAz + 0.1, sunEl: 0.3, sunI: 2.7, disc: 6, glow: 0.5,
     hemiSky: c('#dfe8f0'), hemiGround: c('#4a4a38'), hemiI: 1.25,
     fog: c('#d9dcd8'), fogD: 0.0009, exposure: 0.62,
-    deep: c('#3d5a52'), bank: c('#1c2416'), lamps: 0, stars: 0, glitter: 0.8, moon: 0,
+    deep: c('#2a7096'), bank: c('#1c2416'), lamps: 0, stars: 0, glitter: 0.8, moon: 0,
   },
 ];
 

@@ -1,4 +1,5 @@
 import { createBirds } from './birds.js';
+import { createBoat } from './boat.js';
 import { createFlora } from './flora.js';
 import { createGhat } from './ghat.js';
 import { createGopuram } from './gopuram.js';
@@ -33,7 +34,7 @@ const TIERS = {
 };
 
 export async function bootWorld({ container, tier, reducedMotion, capture = false }) {
-  const config = { ...TIERS[tier], capture, layers: [createFlora, createGopuram, createGhat, createPetals, createBirds] };
+  const config = { ...TIERS[tier], capture, layers: [createFlora, createGopuram, createGhat, createPetals, createBirds, createBoat] };
   if (reducedMotion) config.petals = 0;
   config.reducedMotion = reducedMotion;
   return createWorld({ container, tier: config, reducedMotion });

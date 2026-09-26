@@ -45,18 +45,18 @@ const flameFragment = /* glsl */ `
     if (vKind < 0.5) {
       // Wick flame: teardrop texture, hot enough to bloom.
       vec4 t = texture2D(uFlame, vec2(uv.x, uv.y));
-      col = t.rgb * 5.0;
+      col = t.rgb * 3.2;
       a = t.a;
     } else if (vKind > 1.5) {
       // String-light bulb: a small warm-white core with a tight glow.
       float d = length(uv - 0.5) * 2.0;
-      a = exp(-d * d * 9.0);
-      col = vec3(1.0, 0.82, 0.52) * (0.8 + 3.2 * smoothstep(0.35, 0.0, d));
+      a = exp(-d * d * 10.0);
+      col = vec3(1.0, 0.86, 0.62) * (0.6 + 1.8 * smoothstep(0.35, 0.0, d));
     } else {
       // Soft halo around each lamp.
       float d = length(uv - 0.5) * 2.0;
-      a = exp(-d * d * 4.0) * 0.55;
-      col = vec3(1.0, 0.55, 0.18) * 1.6;
+      a = exp(-d * d * 6.0) * 0.3;
+      col = vec3(1.0, 0.66, 0.32) * 1.2;
     }
     // Additive blending scales colour by alpha (SRC_ALPHA, ONE).
     gl_FragColor = vec4(col, a * vAlpha);
@@ -111,14 +111,17 @@ export function createGhat({ scene, uniforms, tier }) {
   }
   group.add(new THREE.Mesh(mergeGeometries(wallGeos), stoneDark));
 
-  // Reception rotunda: a western classical pavilion in white marble. Stepped
-  // round plinth, eight fluted columns with bases and capitals, a moulded
-  // entablature ring and a shallow dome with a lantern.
+  // Reception rotunda: a western classical pavilion in ivory marble with
+  // gilded details. Stepped round plinth, eight fluted columns with gold
+  // capitals, a moulded entablature with a gold band, and a ribbed dome
+  // crowned by a gold lantern.
   const mx = -13.5;
   const colR = 3.9;
   const cols = 8;
-  const marble = new THREE.MeshLambertMaterial({ color: 0xf2ece2 });
+  const marble = new THREE.MeshLambertMaterial({ color: 0xe2d6bf });
+  const gold = new THREE.MeshPhongMaterial({ color: 0xa9803c, specular: 0xffe2a0, shininess: 70, emissive: 0x140c02 });
   const rGeos = [];
+  const gGeos = [];
   const lathe = (pts, seg = 40) => new THREE.LatheGeometry(pts.map(([r, y]) => new THREE.Vector2(r, y)), seg);
   // Plinth: three circular steps.
   rGeos.push(lathe([[0, 0], [5.4, 0], [5.4, 0.3], [4.95, 0.3], [4.95, 0.6], [4.5, 0.6], [4.5, 0.9], [0, 0.9]]));
@@ -146,20 +149,41 @@ export function createGhat({ scene, uniforms, tier }) {
     const abacus = new THREE.BoxGeometry(0.95, 0.16, 0.95);
     abacus.rotateY(-a);
     abacus.translate(cx, base + 0.32 + shaftH + 0.34, cz);
-    rGeos.push(foot, shaft, capital, abacus);
+    rGeos.push(foot, shaft);
+    gGeos.push(capital, abacus);
   }
   const top = base + 0.32 + shaftH + 0.42;
   // Entablature: architrave, frieze and a projecting cornice.
-  rGeos.push(lathe([[3.3, 0], [4.45, 0], [4.45, 0.34], [4.5, 0.4], [4.5, 0.72], [4.75, 0.82], [4.75, 1.0], [3.3, 1.0]]));
-  rGeos[rGeos.length - 1].translate(0, top, 0);
+  const entablature = lathe([[3.3, 0], [4.45, 0], [4.45, 0.34], [4.5, 0.4], [4.5, 0.72], [4.75, 0.82], [4.75, 1.0], [3.3, 1.0]]);
+  entablature.translate(0, top, 0);
+  rGeos.push(entablature);
+  // Thin gilded band between architrave and frieze.
+  const band = lathe([[4.46, 0], [4.53, 0], [4.53, 0.08], [4.46, 0.08]], 48);
+  band.translate(0, top + 0.34, 0);
+  gGeos.push(band);
   // Dome and lantern.
   const dome = new THREE.SphereGeometry(4.3, 32, 12, 0, Math.PI * 2, 0, Math.PI / 2);
   dome.scale(1, 0.62, 1);
   dome.translate(0, top + 1.0, 0);
   const lantern = lathe([[0, 0], [0.7, 0], [0.7, 0.9], [0.9, 1.0], [0.25, 1.35], [0.12, 1.9], [0, 2.0]], 16);
   lantern.translate(0, top + 1.0 + 4.3 * 0.62 - 0.1, 0);
-  rGeos.push(dome, lantern);
-  const rotunda = new THREE.Mesh(mergeGeometries(rGeos.map((g) => (g.index ? g.toNonIndexed() : g))), marble);
+  rGeos.push(dome);
+  gGeos.push(lantern);
+  // Gilded ribs running up the dome.
+  const domeBase = top + 1.0;
+  for (let i = 0; i < 12; i++) {
+    const a = (i / 12) * Math.PI * 2;
+    const pts = [];
+    for (let k = 0; k <= 10; k++) {
+      const phi = (k / 10) * (Math.PI / 2) * 0.93;
+      const r = 4.32 * Math.cos(phi);
+      pts.push(new THREE.Vector3(Math.cos(a) * r, domeBase + 4.32 * 0.62 * Math.sin(phi), Math.sin(a) * r));
+    }
+    gGeos.push(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 12, 0.06, 5, false));
+  }
+  const merge = (list) => mergeGeometries(list.map((g) => (g.index ? g.toNonIndexed() : g)));
+  const rotunda = new THREE.Group();
+  rotunda.add(new THREE.Mesh(merge(rGeos), marble), new THREE.Mesh(merge(gGeos), gold));
   rotunda.position.set(mx, TOP, 0);
   group.add(rotunda);
 
@@ -169,10 +193,10 @@ export function createGhat({ scene, uniforms, tier }) {
   for (let i = 0; i < cols; i++) {
     const a0 = (i / cols) * Math.PI * 2 + Math.PI / cols;
     const a1 = ((i + 1) / cols) * Math.PI * 2 + Math.PI / cols;
-    for (let k = 1; k < 7; k++) {
-      const t = k / 7;
+    for (let k = 1; k < 9; k++) {
+      const t = k / 9;
       const a = a0 + (a1 - a0) * t;
-      bulbs.push([mx + Math.cos(a) * (colR + 0.15), swagY - 0.75 * 4 * t * (1 - t), Math.sin(a) * (colR + 0.15)]);
+      bulbs.push([mx + Math.cos(a) * (colR + 0.15), swagY - 0.55 * 4 * t * (1 - t), Math.sin(a) * (colR + 0.15)]);
     }
   }
 
@@ -226,14 +250,14 @@ export function createGhat({ scene, uniforms, tier }) {
       kind.push(0);
     }
     pos.push(x, y + 0.1, z);
-    size.push(5.5);
+    size.push(3.2);
     lampIdx.push(i);
     kind.push(1);
   });
   // Bulbs come on around the ring while the lamps are being lit.
   bulbs.forEach(([x, y, z], i) => {
     pos.push(x, y, z);
-    size.push(0.8);
+    size.push(0.32);
     lampIdx.push(1 + (i / bulbs.length) * (lampSpots.length - 2));
     kind.push(2);
   });
@@ -263,12 +287,12 @@ export function createGhat({ scene, uniforms, tier }) {
   group.add(flames);
 
   // Two warm lights carry the lamp glow onto the stone and the water.
-  const glowA = new THREE.PointLight(0xffa447, 0, 46, 1.3);
-  const glowB = new THREE.PointLight(0xffa447, 0, 46, 1.3);
+  const glowA = new THREE.PointLight(0xffc488, 0, 40, 1.5);
+  const glowB = new THREE.PointLight(0xffc488, 0, 40, 1.5);
   glowA.position.set(4, TOP + 3.5, 12);
   glowB.position.set(-5, TOP + 3.5, -10);
   // Warm light inside the rotunda from the string lights.
-  const glowC = new THREE.PointLight(0xffc27a, 0, 16, 1.2);
+  const glowC = new THREE.PointLight(0xffd6a0, 0, 14, 1.4);
   glowC.position.set(mx, TOP + 4.2, 0);
   group.add(glowA, glowB, glowC);
 
@@ -283,9 +307,9 @@ export function createGhat({ scene, uniforms, tier }) {
       const level = light.lamps * (n + 0.6);
       flameUniforms.uLevel.value = level;
       const glow = clamp(level / n, 0, 1);
-      glowA.intensity = glow * 60;
-      glowC.intensity = glow * 12;
-      glowB.intensity = glow * 45;
+      glowA.intensity = glow * 26;
+      glowC.intensity = glow * 10;
+      glowB.intensity = glow * 20;
       if (renderer) flameUniforms.uViewH.value = renderer.getDrawingBufferSize(size2).y;
     },
   };
