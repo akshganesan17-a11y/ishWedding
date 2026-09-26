@@ -9,7 +9,7 @@
     "music.src": "Put an mp3 in public/audio/ and write its path here, e.g. audio/nadaswaram.mp3. Leave the placeholder to hide the speaker button."
   },
   "site": {
-    "url": "[SITE URL]",
+    "url": "https://ish-akash-wedding.vercel.app/",
     "themeColor": "#140d09"
   },
   "couple": {
