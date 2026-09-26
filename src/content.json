@@ -1,0 +1,145 @@
+{
+  "_help": {
+    "placeholders": "Anything in [BRACKETS] is a placeholder. Replace the whole thing, brackets included.",
+    "reception.start": "24-hour time, e.g. \"19:00\". Shown as 7:00 PM in English and மாலை 7:00 in Tamil.",
+    "text.*.timeZone": "Added after every time, e.g. 7:00 PM onwards (IST).",
+    "site.url": "The final public URL, e.g. https://akash-iswarya.vercel.app/ (needed so WhatsApp can load the preview image).",
+    "guest links": "Add ?to=Name to the link to greet a guest by name, e.g. ?to=Ravi%20Uncle. npm run links makes the links for a whole list.",
+    "couple.photo": "Picture of the couple with a transparent background, shown on the first screen. Put it in public/images/. Leave it empty (\"\") to hide.",
+    "music.src": "Put an mp3 in public/audio/ and write its path here, e.g. audio/nadaswaram.mp3. Leave the placeholder to hide the speaker button."
+  },
+  "site": {
+    "url": "[SITE URL]",
+    "themeColor": "#140d09"
+  },
+  "couple": {
+    "groom": { "first": "Akash", "full": "Akash" },
+    "bride": { "first": "Iswaryalakshmi", "full": "Iswaryalakshmi S." },
+    "photo": "images/couple.webp"
+  },
+  "venue": {
+    "mapsUrl": "https://maps.app.goo.gl/bbnXkAdpo83o1hKM7",
+    "mapsQuery": "J.J. Palace, GNT Road, Redhills, Chennai"
+  },
+  "music": {
+    "src": "audio/Nayanthara-Intro-BGM.mp3"
+  },
+  "events": {
+    "reception": { "date": "2026-10-29", "start": "19:00", "durationMinutes": 180 },
+    "muhurtham": { "date": "2026-10-30", "start": "06:00", "end": "07:30" }
+  },
+  "text": {
+    "en": {
+      "lang": "en",
+      "pageTitle": "Akash & Iswaryalakshmi | Wedding Invitation",
+      "shareTitle": "Akash & Iswaryalakshmi are getting married",
+      "shareDescription": "Reception Thu 29 Oct 2026, 7:00 PM · Muhurtham Fri 30 Oct 2026, 6:00–7:30 AM · J.J. Palace, Redhills, Chennai",
+      "groom": "Akash",
+      "bride": "Iswaryalakshmi",
+      "groomFull": "Akash",
+      "brideFull": "Iswaryalakshmi S.",
+      "greeting": "Dear {name},",
+      "pageTitleGuest": "{name}, you are invited | Akash & Iswaryalakshmi",
+      "kicker": "Together with our families",
+      "invite": "we joyfully invite you to celebrate our wedding",
+      "datesShort": "29 & 30 October 2026 · Chennai",
+      "scrollHint": "Scroll",
+      "reception": {
+        "eyebrow": "Thursday evening",
+        "title": "Wedding Reception",
+        "date": "Thursday, 29 October 2026",
+        "timeSuffix": "onwards",
+        "note": "Join us as the lamps are lit and the celebrations begin."
+      },
+      "muhurtham": {
+        "eyebrow": "Friday at sunrise",
+        "title": "Muhurtham",
+        "date": "Friday, 30 October 2026",
+        "lagnam": "Thula lagnam",
+        "note": "Bless us as we begin our life together."
+      },
+      "venueLabel": "Venue",
+      "venue": "J.J. Palace, GNT Road, Redhills, Chennai",
+      "timeLabel": "Time",
+      "timeZone": "IST",
+      "details": {
+        "eyebrow": "Both events",
+        "title": "We look forward to celebrating with you",
+        "maps": "Open in Google Maps",
+        "calendar": "Add to calendar",
+        "googleCal": "Or add to Google Calendar:",
+        "printable": "Printable invitation (PDF)",
+        "signoff": "With love, Akash & Iswaryalakshmi"
+      },
+      "ui": {
+        "skip": "Skip to details",
+        "langSwitch": "தமிழ்",
+        "langSwitchLabel": "தமிழில் படிக்க",
+        "musicPlay": "Play music",
+        "musicPause": "Pause music"
+      },
+      "calendar": {
+        "reception": "Reception: Akash & Iswaryalakshmi",
+        "muhurtham": "Muhurtham: Akash & Iswaryalakshmi",
+        "timeTba": "Start time to be confirmed."
+      },
+      "print": { "map": "Map" },
+      "time": { "am": "AM", "pm": "PM", "to": "to" }
+    },
+    "ta": {
+      "lang": "ta",
+      "pageTitle": "ஆகாஷ் & ஐஸ்வர்யலட்சுமி | திருமண அழைப்பிதழ்",
+      "groom": "ஆகாஷ்",
+      "bride": "ஐஸ்வர்யலட்சுமி",
+      "groomFull": "ஆகாஷ்",
+      "brideFull": "ச. ஐஸ்வர்யலட்சுமி",
+      "greeting": "அன்புள்ள {name},",
+      "pageTitleGuest": "{name}, தங்களுக்கு அன்பான அழைப்பு | ஆகாஷ் & ஐஸ்வர்யலட்சுமி",
+      "kicker": "எங்கள் குடும்பத்தினருடன் இணைந்து",
+      "invite": "எங்கள் திருமண விழாவிற்குத் தங்களை அன்புடன் அழைக்கிறோம்",
+      "datesShort": "அக்டோபர் 29 & 30, 2026 · சென்னை",
+      "scrollHint": "கீழே தொடரவும்",
+      "reception": {
+        "eyebrow": "வியாழன் மாலை",
+        "title": "திருமண வரவேற்பு",
+        "date": "வியாழக்கிழமை, 29 அக்டோபர் 2026",
+        "timeSuffix": "முதல்",
+        "note": "தீபங்கள் ஏற்றப்பட்டு கொண்டாட்டம் தொடங்கும் வேளையில் எங்களுடன் இணையுங்கள்."
+      },
+      "muhurtham": {
+        "eyebrow": "வெள்ளி அதிகாலை",
+        "title": "திருமண முகூர்த்தம்",
+        "date": "வெள்ளிக்கிழமை, 30 அக்டோபர் 2026",
+        "lagnam": "துலா லக்னம்",
+        "note": "எங்கள் புதிய வாழ்க்கையின் தொடக்கத்தில் வருகை தந்து ஆசீர்வதியுங்கள்."
+      },
+      "venueLabel": "இடம்",
+      "venue": "ஜே.ஜே. பேலஸ், ஜி.என்.டி. சாலை, செங்குன்றம் (ரெட்ஹில்ஸ்), சென்னை",
+      "timeLabel": "நேரம்",
+      "timeZone": "இந்திய நேரம்",
+      "details": {
+        "eyebrow": "இரு நிகழ்வுகளும்",
+        "title": "தங்கள் வருகையை அன்புடன் எதிர்நோக்குகிறோம்",
+        "maps": "Google Maps-இல் இடத்தைப் பார்க்க",
+        "calendar": "நாட்காட்டியில் சேர்க்க",
+        "googleCal": "அல்லது Google Calendar-இல் சேர்க்க:",
+        "printable": "அச்சிடக்கூடிய அழைப்பிதழ் (PDF)",
+        "signoff": "அன்புடன், ஆகாஷ் & ஐஸ்வர்யலட்சுமி"
+      },
+      "ui": {
+        "skip": "முழு விவரங்கள்",
+        "langSwitch": "English",
+        "langSwitchLabel": "Read in English",
+        "musicPlay": "இசையை இயக்கு",
+        "musicPause": "இசையை நிறுத்து"
+      },
+      "calendar": {
+        "reception": "வரவேற்பு: ஆகாஷ் & ஐஸ்வர்யலட்சுமி",
+        "muhurtham": "முகூர்த்தம்: ஆகாஷ் & ஐஸ்வர்யலட்சுமி",
+        "timeTba": "நேரம் பின்னர் உறுதிசெய்யப்படும்."
+      },
+      "print": { "map": "வரைபடம்" },
+      "time": { "morning": "காலை", "noon": "மதியம்", "evening": "மாலை", "night": "இரவு" }
+    }
+  }
+}
